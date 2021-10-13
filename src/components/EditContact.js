@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 export default function EditContact() {
   const url = "http://localhost:3004/contacts";
@@ -60,6 +61,10 @@ export default function EditContact() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Update contact</title>
+      </Helmet>
       <h3>Update Contact : {id}</h3>
       <form onSubmit={(e) => EditConHandler(e)}>
         <div class="mb-3">

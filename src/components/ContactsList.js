@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "./Avatar";
 import { Link } from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 export default function ContactsList() {
   const [contactsList, setContactsList] = useState([]);
@@ -47,6 +48,10 @@ export default function ContactsList() {
   }, []);
   return (
     <div>
+      <Helmet>
+      <meta charSet="utf-8" />
+      <title>Contact lists</title>
+    </Helmet>
       <h3>Contacts List</h3>
       <ul className="list-group list-group-flush">
         {contactsList.map((v, i) => (

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Helmet} from "react-helmet";
 
 export default function AddContact() {
   const url = "http://localhost:3004/contacts";
@@ -6,13 +7,13 @@ export default function AddContact() {
     name: "",
     email: "",
   });
-  const [fileInfo, setFileInfo] = useState("")
-  console.log("fileInfo",fileInfo);
+  const [fileInfo, setFileInfo] = useState("");
+  console.log("fileInfo", fileInfo);
 
   const fileHandler = (e) => {
     console.log(e.target.files);
     const file = e.target.files[0];
-    setFileInfo(file );
+    setFileInfo(file);
   };
 
   const handleChange = (e) => {
@@ -51,9 +52,13 @@ export default function AddContact() {
         setInfo({ name: "", email: "", img: "" });
       })
       .catch((error) => console.log("error", error));
-  }
+  };
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>add new contact</title>
+      </Helmet>
       <h3>Add Contact</h3>
       <form onSubmit={(e) => addConHandler(e)}>
         <div class="mb-3">
