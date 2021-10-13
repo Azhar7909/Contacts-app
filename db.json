@@ -1,0 +1,22 @@
+{
+  "contacts": [
+    {
+      "id": 9264682744154,
+      "name": "Muhammad",
+      "email": "mahz7909@example.com",
+      "img": {}
+    },
+    {
+      "id": 46446782549264,
+      "name": "Muhammad Athar",
+      "email": "mahz7909@example.com",
+      "img": {}
+    },
+    {
+      "id": 47941726305466,
+      "name": "Muhammad Athar Zafar",
+      "email": "wwww@example.com",
+      "img": {}
+    }
+  ]
+}
