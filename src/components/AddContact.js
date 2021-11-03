@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import {Helmet} from "react-helmet";
 
+
 export default function AddContact() {
-  const url = "http://localhost:3004/contacts";
+  const url = "http://localhost:8000/contacts";
   const [info, setInfo] = useState({
     name: "",
     email: "",
   });
   const [fileInfo, setFileInfo] = useState("");
-  console.log("fileInfo", fileInfo);
 
   const fileHandler = (e) => {
     console.log(e.target.files);

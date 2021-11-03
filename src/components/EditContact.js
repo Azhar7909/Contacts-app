@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { Put } from "../api_calls/Utills";
 
 export default function EditContact() {
-  const url = "http://localhost:3004/contacts";
+  const url = "http://localhost:8000/contacts";
   const [info, setInfo] = useState({
     name: "",
     email: "",
@@ -29,27 +30,16 @@ export default function EditContact() {
     e.preventDefault();
     const formData = new FormData();
     formData.append("form_data", fileInfo);
-    const data = JSON.stringify({
+    const data = {
       name: info.name,
       email: info.email,
       img: formData,
-    });
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var requestOptions = {
-      method: "PUT",
-      headers: myHeaders,
-      body: data,
-      redirect: "follow",
     };
 
-    fetch(url + "/" + id, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
+    Put(url + "/" + id, data)
+      .then((response) => {
         alert("Contact updated");
-        console.log("result", result);
+        console.log("response", response);
       })
       .catch((error) => console.log("error", error));
   }

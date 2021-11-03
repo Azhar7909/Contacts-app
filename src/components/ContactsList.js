@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "./Avatar";
 import { Link } from "react-router-dom";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
+import axios from "axios";
+import { Get, Delete } from "../api_calls/Utills";
 
 export default function ContactsList() {
   const [contactsList, setContactsList] = useState([]);
   const [conDetail, setConDetail] = useState({});
 
-  const url = "http://localhost:3004/contacts";
+  const url = "http://localhost:8000/contacts";
 
   function deleteHandler(id) {
-    var requestOptions = {
-      method: "DELETE",
-      redirect: "follow",
-    };
-
-    fetch(url + "/" + id, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
+    Delete(url + "/" + id)
+      .then((response) => {
         getContactsList();
-        console.log(result);
+        console.log(response);
       })
       .catch((error) => console.log("error", error));
   }
@@ -31,17 +27,14 @@ export default function ContactsList() {
   }
 
   function getContactsList() {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setContactsList(result);
+    Get(url)
+      .then((response) => {
+        setContactsList(response.data);
+        console.log("contactList",response.data);
       })
-      .catch((error) => console.log("error", error));
+      .catch((err) => {
+        console.log("err", err);
+      });
   }
   useEffect(() => {
     getContactsList();
@@ -49,9 +42,9 @@ export default function ContactsList() {
   return (
     <div>
       <Helmet>
-      <meta charSet="utf-8" />
-      <title>Contact lists</title>
-    </Helmet>
+        <meta charSet="utf-8" />
+        <title>Contact lists</title>
+      </Helmet>
       <h3>Contacts List</h3>
       <ul className="list-group list-group-flush">
         {contactsList.map((v, i) => (
@@ -63,7 +56,9 @@ export default function ContactsList() {
               <Avatar img={v.img} name={v.name} />
               <div>
                 <div className="mx-3">{v.name}</div>
-                <div className="mx-3" style={{fontSize:'10px'}}>{v.email}</div>
+                <div className="mx-3" style={{ fontSize: "10px" }}>
+                  {v.email}
+                </div>
               </div>
             </span>
             <span>
